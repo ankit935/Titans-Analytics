@@ -82,7 +82,6 @@ L.forEach(p=>{p.sr=p.b?p.r/p.b*100:0;p.bnd=p.f*4+p.s*6;p.rot=p.b?(p.r-p.bnd)/p.b
 CATS=[
 {k:"Highest Run Scorer",i:"🔥",d:"Most total runs",f:p=>p.b>0,s:(a,b)=>b.r-a.r,v:p=>p.r+" runs",n:p=>p.r},
 {k:"Top Wicket Taker",i:"🎯",d:"Most wickets · ties: better economy",f:p=>p.w>0,s:(a,b)=>b.w-a.w||a.eco-b.eco,v:p=>p.w+" wkts",n:p=>p.w},
-{k:"Defensive Batsman",i:"🛡️",d:"Lowest strike rate · min 10 balls",f:p=>p.b>=10,s:(a,b)=>a.sr-b.sr,v:p=>p.sr.toFixed(1)+" SR",n:p=>200-p.sr},
 {k:"Hard Hitter",i:"💥",d:"Most runs from 4s and 6s",f:p=>p.bnd>0,s:(a,b)=>b.bnd-a.bnd,v:p=>p.bnd+" in boundaries",n:p=>p.bnd},
 {k:"All-round Performer",i:"⭐",d:"Bat + bowl · runs + 20 × wickets",f:p=>p.bat&&p.bow&&p.bl>0,s:(a,b)=>(b.r+20*b.w)-(a.r+20*a.w),v:p=>(p.r+20*p.w)+" pts",n:p=>p.r+20*p.w},
 {k:"Strike Rotator",i:"🔄",d:"Non-boundary runs per ball · min 10 balls",f:p=>p.b>=10,s:(a,b)=>b.rot-a.rot,v:p=>p.rot.toFixed(2)+" /ball",n:p=>p.rot},
