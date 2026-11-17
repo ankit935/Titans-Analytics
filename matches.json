@@ -1,1 +1,270 @@
-[]
+[
+ {
+  "title": "Titans - B vs Titans - A",
+  "date": "31 Oct 2026",
+  "venue": "",
+  "result": "Titans - B vs Toss Tatva Titans - B opt to bat Match Tatva Titans - A Total Tatva Titans - B 150/8 (20.0 Ov) Ground Eves Garden, Tatva Titans - A 153/5 (19.5 Ov) Ahmedabad Result Tatva Titans - A won by 5 wickets",
+  "innings": [
+   {
+    "team": "Titans - B",
+    "score": "150/8 (20.0)",
+    "bat": [
+     [
+      "Parth Patel",
+      11,
+      6,
+      2,
+      0,
+      1
+     ],
+     [
+      "Uttam Bhuva",
+      9,
+      17,
+      1,
+      0,
+      1
+     ],
+     [
+      "Jha Shashwat",
+      42,
+      36,
+      5,
+      0,
+      0
+     ],
+     [
+      "Akshay Pandharpatte",
+      2,
+      8,
+      0,
+      0,
+      1
+     ],
+     [
+      "Yash Suthar",
+      7,
+      6,
+      1,
+      0,
+      1
+     ],
+     [
+      "Ankit Vora",
+      38,
+      22,
+      5,
+      0,
+      1
+     ],
+     [
+      "Gunjan Bhavsar",
+      12,
+      7,
+      2,
+      0,
+      1
+     ],
+     [
+      "Dharmesh Chauhan",
+      3,
+      6,
+      0,
+      0,
+      1
+     ],
+     [
+      "Amit Mehta",
+      4,
+      9,
+      0,
+      0,
+      0
+     ],
+     [
+      "Vijay Chudasama",
+      0,
+      5,
+      0,
+      0,
+      1
+     ]
+    ],
+    "bowl": [
+     [
+      "Bhoomit Patel",
+      "4",
+      35,
+      2,
+      13,
+      8,
+      0
+     ],
+     [
+      "Zeel Vaghasiya",
+      "4",
+      22,
+      1,
+      11,
+      1,
+      0
+     ],
+     [
+      "Dushyant Gadhiya",
+      "5",
+      28,
+      1,
+      14,
+      1,
+      0
+     ],
+     [
+      "Deep Dharasandiya",
+      "4",
+      23,
+      3,
+      10,
+      2,
+      0
+     ],
+     [
+      "Ankit Vora",
+      "1",
+      15,
+      0,
+      0,
+      2,
+      1
+     ],
+     [
+      "Dharmesh Chauhan",
+      "2",
+      23,
+      1,
+      2,
+      3,
+      0
+     ]
+    ]
+   },
+   {
+    "team": "Titans - A",
+    "score": "153/5 (19.5)",
+    "bat": [
+     [
+      "Amit Mehta",
+      1,
+      6,
+      0,
+      0,
+      1
+     ],
+     [
+      "Shreyash Zala",
+      23,
+      26,
+      2,
+      1,
+      1
+     ],
+     [
+      "Devraj Vasani",
+      4,
+      8,
+      1,
+      0,
+      1
+     ],
+     [
+      "Mehul Patel",
+      56,
+      41,
+      5,
+      3,
+      0
+     ],
+     [
+      "Rajesh Satvara",
+      27,
+      23,
+      2,
+      1,
+      1
+     ],
+     [
+      "Deep Dharasandiya",
+      9,
+      13,
+      1,
+      0,
+      1
+     ],
+     [
+      "Dushyant Gadhiya",
+      6,
+      7,
+      0,
+      0,
+      0
+     ],
+     [
+      "Bhoomit Patel",
+      5,
+      2,
+      1,
+      0,
+      0
+     ]
+    ],
+    "bowl": [
+     [
+      "Ankit Vora",
+      "5",
+      26,
+      0,
+      12,
+      1,
+      0
+     ],
+     [
+      "Dharmesh Chauhan",
+      "4",
+      34,
+      0,
+      13,
+      2,
+      0
+     ],
+     [
+      "Amit Mehta",
+      "5.5",
+      32,
+      4,
+      18,
+      0,
+      1
+     ],
+     [
+      "Akshay Pandharpatte",
+      "4",
+      38,
+      1,
+      12,
+      1,
+      5
+     ],
+     [
+      "Yash Suthar",
+      "1",
+      18,
+      0,
+      3,
+      7,
+      0
+     ]
+    ]
+   }
+  ],
+  "id": "m2304451520"
+ }
+]
