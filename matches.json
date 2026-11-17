@@ -2,8 +2,8 @@
  {
   "title": "Titans - B vs Titans - A",
   "date": "31 Oct 2026",
-  "venue": "",
-  "result": "Titans - B vs Toss Tatva Titans - B opt to bat Match Tatva Titans - A Total Tatva Titans - B 150/8 (20.0 Ov) Ground Eves Garden, Tatva Titans - A 153/5 (19.5 Ov) Ahmedabad Result Tatva Titans - A won by 5 wickets",
+  "venue": "Eves Garden, Ahmedabad",
+  "result": "Titans - A won by 5 wickets",
   "innings": [
    {
     "team": "Titans - B",
@@ -15,7 +15,8 @@
       6,
       2,
       0,
-      1
+      1,
+      "c Shreyash Zala b Zeel Vaghasiya"
      ],
      [
       "Uttam Bhuva",
@@ -23,7 +24,8 @@
       17,
       1,
       0,
-      1
+      1,
+      "b Deep Dharasandiya"
      ],
      [
       "Jha Shashwat",
@@ -31,7 +33,8 @@
       36,
       5,
       0,
-      0
+      0,
+      "not out"
      ],
      [
       "Akshay Pandharpatte",
@@ -39,7 +42,8 @@
       8,
       0,
       0,
-      1
+      1,
+      "c Shreyash Zala b Deep Dharasandiya"
      ],
      [
       "Yash Suthar",
@@ -47,7 +51,8 @@
       6,
       1,
       0,
-      1
+      1,
+      "c Dushyant Gadhiya b Dharmesh Chauhan"
      ],
      [
       "Ankit Vora",
@@ -55,7 +60,8 @@
       22,
       5,
       0,
-      1
+      1,
+      "b Deep Dharasandiya"
      ],
      [
       "Gunjan Bhavsar",
@@ -63,7 +69,8 @@
       7,
       2,
       0,
-      1
+      1,
+      "b Dushyant Gadhiya"
      ],
      [
       "Dharmesh Chauhan",
@@ -71,7 +78,8 @@
       6,
       0,
       0,
-      1
+      1,
+      "c Deep Dharasandiya b Bhoomit Patel"
      ],
      [
       "Amit Mehta",
@@ -79,7 +87,8 @@
       9,
       0,
       0,
-      0
+      0,
+      "not out"
      ],
      [
       "Vijay Chudasama",
@@ -87,7 +96,8 @@
       5,
       0,
       0,
-      1
+      1,
+      "st Shreyash Zala b Bhoomit Patel"
      ]
     ],
     "bowl": [
@@ -157,7 +167,8 @@
       6,
       0,
       0,
-      1
+      1,
+      "c Rakesh Vanand b Akshay Pandharpatte"
      ],
      [
       "Shreyash Zala",
@@ -165,7 +176,8 @@
       26,
       2,
       1,
-      1
+      1,
+      "c Ankit Vora b Amit Mehta"
      ],
      [
       "Devraj Vasani",
@@ -173,7 +185,8 @@
       8,
       1,
       0,
-      1
+      1,
+      "b Amit Mehta"
      ],
      [
       "Mehul Patel",
@@ -181,7 +194,8 @@
       41,
       5,
       3,
-      0
+      0,
+      "retired hurt"
      ],
      [
       "Rajesh Satvara",
@@ -189,7 +203,8 @@
       23,
       2,
       1,
-      1
+      1,
+      "c Dharmesh Chauhan b Amit Mehta"
      ],
      [
       "Deep Dharasandiya",
@@ -197,7 +212,8 @@
       13,
       1,
       0,
-      1
+      1,
+      "b Amit Mehta"
      ],
      [
       "Dushyant Gadhiya",
@@ -205,7 +221,8 @@
       7,
       0,
       0,
-      0
+      0,
+      "not out"
      ],
      [
       "Bhoomit Patel",
@@ -213,7 +230,8 @@
       2,
       1,
       0,
-      0
+      0,
+      "not out"
      ]
     ],
     "bowl": [
@@ -270,8 +288,8 @@
  {
   "title": "Thunder striker A vs Titans - B",
   "date": "24 Oct 2026",
-  "venue": "",
-  "result": "Thunder striker A vs Toss Tatva Titans - B opt to field Match Tatva Titans - B Total Thunder striker A 196/9 (20.0 Ov) Ground Mahesh Cricket Ground, Tatva Titans - B 162/10 (20.0 Ov) Ahmedabad Result Thunder striker A won by 34 runs",
+  "venue": "Mahesh Cricket Ground, Ahmedabad",
+  "result": "Thunder striker A won by 34 runs",
   "innings": [
    {
     "team": "Thunder striker A",

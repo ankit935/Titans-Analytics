@@ -143,7 +143,7 @@ const H=/^(.+?)\s+(\d+\/\d+)\s+\(([\d.]+)\s*Ov\)\s*\(\d+\w*\s*Innings\)/,B=/^\d+
 lines.forEach(l=>{let m;if(m=l.match(H)){cur={team:m[1].trim(),score:`${m[2]} (${m[3]})`,bat:[],bowl:[]};inn.push(cur)}else if(cur&&(m=l.match(B))){const st=m[2];cur.bat.push([m[1].trim(),+m[3],+m[4],+m[6],+m[7],/not out|retired/i.test(st)?0:1,st.trim()])}
 else if(cur&&(m=l.match(W))){cur.bowl.push([m[1].replace(/\s*\([^)]*\)/g,"").trim(),m[2],+m[4],+m[5],+m[6],+m[9],+m[10]])}});
 if(!inn.length||!inn.some(i=>i.bat.length))throw new Error("no scorecard rows found");
-const sh=t=>t.replace(/^Tatva\s+/i,"");const d=txt.match(/Date\s+(\d{4})-(\d{2})-(\d{2})/),r=txt.match(/Result\s+(.*?won by \d+ \w+)/i)||txt.match(/Result\s+(.*?(?:tied|no result|abandoned))/i);
+const sh=t=>t.replace(/^Tatva\s+/i,"");const d=txt.match(/Date\s+(\d{4})-(\d{2})-(\d{2})/),ri=txt.lastIndexOf("Result "),rt=ri<0?"":txt.slice(ri+7),r=rt.match(/^(.*?won by \d+ \w+)/i)||rt.match(/^(.*?(?:tied|no result|abandoned))/i);
 const mo=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const m={title:inn.map(i=>sh(i.team)).join(" vs "),date:d?`${+d[3]} ${mo[+d[2]-1]} ${d[1]}`:"",venue:"",result:r?sh(r[1]):"",innings:inn.map(i=>({...i,team:sh(i.team)}))};
 m.id="m"+[...(d?d[0]:"")+inn.map(i=>i.team+i.score).join("|")].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7);return m}
