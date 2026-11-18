@@ -68,7 +68,7 @@ nav .lg{display:none}nav button{padding:6px 0;font-size:18px;border-radius:12px}
 </style></head><body><div class="app"><nav id="nav"><img class="lg" alt="Tatva Titans">
 <button data-t="lead" class="on"><i>🏆</i><span>Leaders</span></button><button data-t="pl"><i>👤</i><span>Players</span></button><button data-t="sq"><i>✅</i><span>Squad 15</span></button><button data-t="mt"><i>📋</i><span>Matches</span></button><button data-t="up"><i>🔒</i><span>Upload</span></button></nav>
 <div class="main"><div class="bar"><h1 id="ttl">Leaderboards</h1><select id="tf" onchange="setTF(this.value)" title="Team filter"></select><div class="kp" id="kp"></div></div><main id="main"></main>
-<p class="note">Strike rotation = (runs − boundary runs) ÷ (balls faced − 4s − 6s). The scorecard doesn’t list singles, so this is an estimate.</p><footer class="ft">© <span id="yr">2026</span> <span>Tatva Titans Analytics</span> · All rights reserved by <b>Ankit Vora</b></footer></div></div><dialog id="dlg"></dialog><div id="toast"></div>
+<p class="note">Strike rotation = (runs − boundary runs) ÷ (balls faced − 4s − 6s). The scorecard doesn’t list singles, so this is an estimate. Consistency = average match impact × (1 − swing), where swing = standard deviation ÷ average (needs 2+ matches). Finisher = average per innings of runs × strike rate ÷ 100, plus 15 for finishing not out in a winning chase (5 for any other not-out); batting position is ignored, min 15 balls faced.</p><footer class="ft">© <span id="yr">2026</span> <span>Tatva Titans Analytics</span> · All rights reserved by <b>Ankit Vora</b></footer></div></div><dialog id="dlg"></dialog><div id="toast"></div>
 <script>
 const HASH="7a19ed377df87c3fe90bce639be73342a6e963ff918ea614256961e696402c22";
 const SEED=[];
@@ -80,10 +80,12 @@ const MY_TEAM="Titans",MY_RE=/^(tatva\s+)?titans(\s*[-–]?\s*[ab])?$/i;let SEL=
 const inc=t=>SEL==="*"||(SEL===""?MY_RE.test(String(t).trim()):t===SEL);
 function sides(m){const tn=[...new Set(m.innings.map(i=>i.team))],bat=[],bowl=[],field=[];m.innings.forEach(i=>{const ft=tn.find(t=>t!==i.team)||"";if(inc(i.team))bat.push(...i.bat);if(inc(ft)){bowl.push(...i.bowl);i.bat.forEach(x=>field.push(x[6]||""))}});return{bat,bowl,field}}
 function fld(st){st=String(st||"").trim();let m;if(m=st.match(/^c\s*&\s*b\s+(.+)$/))return[{n:m[1].trim(),k:"ct"}];if(m=st.match(/^c\s+(.+?)\s+b\s+.+$/))return[{n:m[1].trim(),k:"ct"}];if(m=st.match(/^st\s+(.+?)\s+b\s+.+$/))return[{n:m[1].trim(),k:"stp"}];if(m=st.match(/^run out\s*\((.+?)\)?$/))return m[1].split("/").map(n=>({n:n.trim(),k:"ro"}));return[]}
-function compute(){P={};const G=n=>P[n]||(P[n]={name:n,r:0,b:0,f:0,s:0,out:0,bl:0,rc:0,w:0,dots:0,ex:0,hs:0,m:0,bat:0,bow:0,ct:0,stp:0,ro:0});
+function compute(){P={};const G=n=>P[n]||(P[n]={name:n,r:0,b:0,f:0,s:0,out:0,bl:0,rc:0,w:0,dots:0,ex:0,hs:0,m:0,bat:0,bow:0,ct:0,stp:0,ro:0,fin:0,finN:0,finR:0,finI:0,finB:0,ms:[]});
 ALL.forEach(m=>{const seen=new Set();[sides(m)].forEach(i=>{i.bat.forEach(x=>{const p=G(x[0]);p.r+=x[1];p.b+=x[2];p.f+=x[3];p.s+=x[4];p.out+=x[5];p.hs=Math.max(p.hs,x[1]);p.bat=1;seen.add(x[0])});i.bowl.forEach(x=>{const p=G(x[0]);p.bl+=balls(x[1]);p.rc+=x[2];p.w+=x[3];p.dots+=x[4];p.ex+=x[5]+x[6];p.bow=1;seen.add(x[0])});(i.field||[]).forEach(st=>fld(st).forEach(q=>{const p=G(q.n);p[q.k]++;seen.add(q.n)}))});seen.forEach(n=>G(n).m++)});
+ALL.forEach(m=>{const o=mi(m);Object.keys(o).forEach(n=>{if(P[n])P[n].ms.push(o[n].imp)})});
+ALL.forEach(m=>m.innings.forEach((i,k)=>{if(!inc(i.team))return;const won=(m.result||"").includes(i.team+" won");i.bat.forEach(x=>{if(x[2]<1)return;const p=G(x[0]),no=!x[5]&&!/retired/i.test(x[6]||""),ch=no&&k===1&&won;p.finI++;p.finR+=x[1];p.finB+=x[2];p.fin+=x[1]*(x[1]/x[2])+(ch?15:no?5:0);if(ch)p.finN++})}));
 EXTRA.forEach(G);L=Object.values(P);
-L.forEach(p=>{p.sr=p.b?p.r/p.b*100:0;p.bnd=p.f*4+p.s*6;p.rot=p.b-p.f-p.s>0?(p.r-p.bnd)/(p.b-p.f-p.s):0;p.eco=p.bl?p.rc/(p.bl/6):0;p.ov=Math.floor(p.bl/6)+(p.bl%6?"."+p.bl%6:"");p.fd=p.ct+p.stp+p.ro;p.imp=p.r+25*p.w+.3*p.dots-.5*p.ex+10*p.fd;p.role=p.bat&&p.bow?"All-rounder":p.bow?"Bowler":p.bat?"Batter":p.fd?"Fielder":"No data yet"});
+L.forEach(p=>{p.sr=p.b?p.r/p.b*100:0;p.bnd=p.f*4+p.s*6;p.rot=p.b-p.f-p.s>0?(p.r-p.bnd)/(p.b-p.f-p.s):0;p.eco=p.bl?p.rc/(p.bl/6):0;p.ov=Math.floor(p.bl/6)+(p.bl%6?"."+p.bl%6:"");p.fd=p.ct+p.stp+p.ro;p.fa=p.finI?p.fin/p.finI:0;p.ma=p.ms.length?p.ms.reduce((a,b)=>a+b,0)/p.ms.length:0;p.sd=Math.sqrt(p.ms.reduce((a,b)=>a+(b-p.ma)**2,0)/(p.ms.length||1));p.cons=p.ma>0?p.ma*(1-Math.min(1,p.sd/p.ma)):0;p.imp=p.r+25*p.w+.3*p.dots-.5*p.ex+10*p.fd;p.role=p.bat&&p.bow?"All-rounder":p.bow?"Bowler":p.bat?"Batter":p.fd?"Fielder":"No data yet"});
 CATS=[
 {k:"Highest Run Scorer",i:"🔥",d:"Most total runs",f:p=>p.b>0,s:(a,b)=>b.r-a.r,v:p=>p.r+" runs",n:p=>p.r},
 {k:"Top Wicket Taker",i:"🎯",d:"Most wickets · ties: better economy",f:p=>p.w>0,s:(a,b)=>b.w-a.w||a.eco-b.eco,v:p=>p.w+" wkts",n:p=>p.w},
@@ -91,10 +93,12 @@ CATS=[
 {k:"All-round Performer",i:"⭐",d:"Bat + bowl · runs + 20 × wickets",f:p=>p.bat&&p.bow&&p.bl>0,s:(a,b)=>(b.r+20*b.w)-(a.r+20*a.w),v:p=>(p.r+20*p.w)+" pts",n:p=>p.r+20*p.w},
 {k:"Strike Rotator",i:"🔄",d:"Runs per non-boundary ball · min 10 balls faced",f:p=>p.b>=10,s:(a,b)=>b.rot-a.rot,v:p=>p.rot.toFixed(2)+" /ball",n:p=>p.rot},
 {k:"Most Economical Bowler",i:"💎",d:"Lowest economy · min 4 overs",f:p=>p.bl>=24,s:(a,b)=>a.eco-b.eco,v:p=>p.eco.toFixed(2)+" eco",n:p=>20-p.eco},
-{k:"Best Fielder",i:"🧤",d:"Catches + stumpings + run-outs",f:p=>p.fd>0,s:(a,b)=>b.fd-a.fd||b.ct-a.ct,v:p=>p.fd+" ("+p.ct+"c"+(p.stp?" "+p.stp+"st":"")+(p.ro?" "+p.ro+"ro":"")+")",n:p=>p.fd}];
+{k:"Best Fielder",i:"🧤",d:"Catches + stumpings + run-outs",f:p=>p.fd>0,s:(a,b)=>b.fd-a.fd||b.ct-a.ct,v:p=>p.fd+" ("+p.ct+"c"+(p.stp?" "+p.stp+"st":"")+(p.ro?" "+p.ro+"ro":"")+")",n:p=>p.fd},
+{k:"Most Consistent Player",i:"📈",d:"High average impact with small match-to-match swings · min 2 matches",f:p=>p.ms.length>=2&&p.ma>0,s:(a,b)=>b.cons-a.cons,v:p=>p.ma.toFixed(0)+" avg ±"+p.sd.toFixed(0),n:p=>p.cons},
+{k:"Match Finisher",i:"🏁",d:"Fast, high-impact batting and not-out finishes · any batting position · min 15 balls",f:p=>p.finB>=15,s:(a,b)=>b.fa-a.fa,v:p=>p.fa.toFixed(0)+" pts/inn · SR "+p.sr.toFixed(0)+(p.finN?" · "+p.finN+" chase finish":""),n:p=>p.fa}];
 CATS.forEach(c=>c.top=L.filter(c.f).sort(c.s));L.forEach(p=>p.badges=CATS.filter(c=>c.top[0]&&c.top[0].name===p.name).map(c=>c.i+" "+c.k));
 if(!touched)sel=new Set([...L].sort((a,b)=>b.imp-a.imp).slice(0,15).map(p=>p.name))}
-function fillTF(){const ts=[...new Set(ALL.flatMap(m=>m.innings.map(i=>i.team)))],e=$("#tf");if(SEL!==""&&SEL!=="*"&&!ts.includes(SEL))SEL="";e.innerHTML=`<option value="">My Team</option>`+ts.map(t=>`<option>${t}</option>`).join("")+`<option value="*">Everyone</option>`;e.value=SEL}
+function fillTF(){const ts=[...new Set(ALL.flatMap(m=>m.innings.map(i=>i.team)))],e=$("#tf");if(SEL!==""&&SEL!=="*"&&!ts.includes(SEL))SEL="";e.innerHTML=`<option value="">My team (Titans A, B &amp; Tatva Titans)</option>`+ts.map(t=>`<option>${t}</option>`).join("")+`<option value="*">Everyone</option>`;e.value=SEL}
 function setTF(v){SEL=v;try{localStorage.setItem("tt_team",v)}catch(e){}touched=false;cur=null;rebuild()}
 function rebuild(){const seen=new Set();ALL=[];[...SEED,...repo,...remote,...local].forEach(m=>{if(!seen.has(m.id)){seen.add(m.id);ALL.push(m)}});compute();
 fillTF();$("#kp").innerHTML=`<div><b>${ALL.length}</b>Matches</div><div><b>${L.length}</b>Players</div><div><b>${L.reduce((a,p)=>a+p.r,0)}</b>Runs</div><div><b>${L.reduce((a,p)=>a+p.w,0)}</b>Wickets</div>`;go(tab)}
