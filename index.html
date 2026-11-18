@@ -98,7 +98,7 @@ CATS=[
 {k:"Match Finisher",i:"🏁",d:"Fast, high-impact batting and not-out finishes · any batting position · min 15 balls",f:p=>p.finB>=15,s:(a,b)=>b.fa-a.fa,v:p=>p.fa.toFixed(0)+" pts/inn · SR "+p.sr.toFixed(0)+(p.finN?" · "+p.finN+" chase finish":""),n:p=>p.fa}];
 CATS.forEach(c=>c.top=L.filter(c.f).sort(c.s));L.forEach(p=>p.badges=CATS.filter(c=>c.top[0]&&c.top[0].name===p.name).map(c=>c.i+" "+c.k));
 if(!touched)sel=new Set([...L].sort((a,b)=>b.imp-a.imp).slice(0,15).map(p=>p.name))}
-function fillTF(){const ts=[...new Set(ALL.flatMap(m=>m.innings.map(i=>i.team)))],e=$("#tf");if(SEL!==""&&SEL!=="*"&&!ts.includes(SEL))SEL="";e.innerHTML=`<option value="">My team (Titans A, B &amp; Tatva Titans)</option>`+ts.map(t=>`<option>${t}</option>`).join("")+`<option value="*">Everyone</option>`;e.value=SEL}
+function fillTF(){const ts=[...new Set(ALL.flatMap(m=>m.innings.map(i=>i.team)))],e=$("#tf");if(SEL!==""&&SEL!=="*"&&!ts.includes(SEL))SEL="";e.innerHTML=`<option value="">My Team</option>`+ts.map(t=>`<option>${t}</option>`).join("")+`<option value="*">Everyone</option>`;e.value=SEL}
 function setTF(v){SEL=v;try{localStorage.setItem("tt_team",v)}catch(e){}touched=false;cur=null;rebuild()}
 function rebuild(){const seen=new Set();ALL=[];[...SEED,...repo,...remote,...local].forEach(m=>{if(!seen.has(m.id)){seen.add(m.id);ALL.push(m)}});compute();
 fillTF();$("#kp").innerHTML=`<div><b>${ALL.length}</b>Matches</div><div><b>${L.length}</b>Players</div><div><b>${L.reduce((a,p)=>a+p.r,0)}</b>Runs</div><div><b>${L.reduce((a,p)=>a+p.w,0)}</b>Wickets</div>`;go(tab)}
